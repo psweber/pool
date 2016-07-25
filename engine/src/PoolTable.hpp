@@ -43,6 +43,9 @@ class PoolTable
 			T& vec
 		);
 		
+		template <typename T>
+		void deleteObjectFromVector(int id,T& vec);
+		
 	public:
 		PoolTable();
 		
@@ -100,6 +103,12 @@ class PoolTable
          * @param obj
          */
 		void deleteObject(std::shared_ptr<Object> obj);
+		
+        /**
+         * @brief deleteObject Delete object specified by id and shape
+         * @param obj
+         */
+		void deleteObject(int id, ObjectType objType);
 		
         /**
          * @brief printBoundingBoxes Print bounding boxes to stdout
@@ -188,6 +197,19 @@ void PoolTable::deleteObjectFromVector
 	if(it != vec.end())
 	{
 		vec.erase(it);
+	}
+}
+
+template <typename T>
+void PoolTable::deleteObjectFromVector(int id,T& vec)
+{
+	typename T::iterator it = vec.begin();
+	while (it != vec.end())
+	{
+		if ((*it)->id() == id)
+		{
+			vec.erase(it++);
+		}
 	}
 }
 

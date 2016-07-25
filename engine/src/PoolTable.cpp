@@ -106,6 +106,24 @@ void engine::PoolTable::deleteObject(std::shared_ptr<Object> obj)
 	}
 }
 
+void engine::PoolTable::deleteObject(int id, ObjectType objType)
+{
+	switch (objType)
+	{
+		case ObjectType::BOUNDARY:
+			deleteObjectFromVector(id,boundaryObjects_);
+			break;
+			
+		case ObjectType::STATIC:
+			deleteObjectFromVector(id,staticObjects_);
+			break;
+			
+		case ObjectType::MOVING:
+			deleteObjectFromVector(id,movingObjects_);
+			break;
+	}
+}
+
 void engine::PoolTable::createCollisionSet(ObjectType objType, CollisionType colType)
 {
 	for ( int i=1; i<3; i++)
