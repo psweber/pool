@@ -87,6 +87,16 @@ void QPoolEngine::connect()
 
 	// Connect random button
 	QObject::connect(ui()->randomButton, SIGNAL(clicked()), this, SLOT(slotRandomVelocity()));
+
+	/*
+	QObject::connect
+	(
+		scene(),
+		SIGNAL(changed(const QList<QRectF> &) ),
+		ui()->graphicsView,
+		SLOT(updateScene( const QList<QRectF> &))
+	);
+	*/
 }
 
 void QPoolEngine::window(MainWindow* window)
@@ -161,10 +171,12 @@ QPoolObject* QPoolEngine::createMovingObject
 	{
 		case engine::ShapeType::RECTANGLE:
 			scene()->addItem(qObj->asRect());
+			graphicItems_.append(qObj->asRect());
 			break;
 		
 		case engine::ShapeType::ELLIPSE:
 			scene()->addItem(qObj->asEllipse());
+			graphicItems_.append(qObj->asEllipse());
 			break;
 		
 		default:
@@ -481,14 +493,12 @@ void QPoolEngine::printObjects() const
 
 void QPoolEngine::updateObjects()
 {
-	qDebug() << "updating " << scene()->items().size() << " items, "
-	  << "having " << scene()->children().size() << " children";
-	for (auto item : scene()->items())
+	qDebug() << "items in scene: " << scene()->items().size();
+	for (auto item : graphicItems_)
 	{
 		QPoolObject *qObj(dynamic_cast<QPoolObject*>(item));
 		
 		qObj->updateFromEngine();
-		
 	}
 }
 

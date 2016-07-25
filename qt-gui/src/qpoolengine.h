@@ -70,6 +70,7 @@ private:
      */
     QThread refresherThread_;
 	
+	QList<QGraphicsItem*> graphicItems_;
     /**
      * @brief createRectBoundaryObject Creates rectangular boundary object
      * @param centerX Center X position
