@@ -11,3 +11,11 @@ html
 latex
 
 qt-gui
+
+*.aux
+*.log
+*.nav
+*.out
+*.pdf
+*.snm
+*.toc

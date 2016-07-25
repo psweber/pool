@@ -1,0 +1,163 @@
+\documentclass{beamer}
+
+\usepackage{graphicx}
+\usepackage{MnSymbol,wasysym}
+
+\graphicspath{{graphics/}}
+\title{Qt Application: Pool}
+\date{}
+\author{Paul S. Weber}
+\begin{document}
+\maketitle
+\section{First Section}
+
+\begin{frame}{Overview}
+	\begin{itemize}
+		\item Engine and GUI
+		
+		\vspace*{1em}
+		\item Engine in Detail
+		\begin{itemize}
+			\item Objects
+			\item Collisions
+			\item PoolEngine
+		\end{itemize}
+		
+		\vspace*{1em}
+		\item GUI in Detail
+		\begin{itemize}
+			\item Objects
+			\item Ticker / Refresher
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Engine and GUI}
+	\begin{itemize}
+		\item Separate computation (engine) and representation (GUI)
+		\begin{itemize}
+			\item Reflects the logic
+			\item Eases (long-term) maintenance
+			\item Would ease parallel development
+		\end{itemize}
+		
+		\vspace*{1em}
+		\item Communication via inheritance and members
+	\end{itemize}
+	\begin{center}
+		\includegraphics[width=6cm]{classQPoolEngine__inherit__graph}
+	\end{center}
+\end{frame}
+
+\begin{frame}{Engine: Objects}
+	\begin{itemize}
+		\item Model the ``real'' objects
+		\item Abstract base class (kinematic and geometric properties)
+		\item Specialization for different purposes
+	\end{itemize}
+	
+	\begin{center}
+		\includegraphics[width=7cm]{classengine_1_1Object__inherit__graph}
+	\end{center}
+\end{frame}
+
+\begin{frame}{Engine: Collisions}
+	\begin{itemize}
+		\item Handling collisions is complex
+		\begin{itemize}
+			\item Collision detection
+			\item Collision computation
+			\item Collision specification
+		\end{itemize}
+		
+		\vspace*{1em}
+		\item Control over every ObjectType -- ShapeType collision
+	\end{itemize}
+	\begin{center}
+		\includegraphics[height=3.5cm]{classengine_1_1CollisionDetector__inherit__graph}
+		\includegraphics[height=3.5cm]{classengine_1_1CollisionModel__inherit__graph}
+	\end{center}
+\end{frame}
+
+\begin{frame}{Engine: PoolEngine and PoolTable}
+	\begin{itemize}
+		\item PoolEngine
+		\begin{itemize}
+			\item Master object
+			\item Responsible for time advancing
+			\item Holds the table
+		\end{itemize}
+		
+		\vspace*{1em}
+		\item PoolTable
+		\begin{itemize}
+			\item Responsible for data management
+			\item Interface for generation/modification/deletion
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{GUI: Objects}
+	\begin{itemize}
+		\item Goal: graphical representation of PoolObject
+		\begin{itemize}
+			\item Data from PoolEngine via PoolObject
+			\item Data to QGraphicsScene via QGraphicsItems
+		\end{itemize}
+	\end{itemize}
+	\begin{center}
+		\includegraphics[height=4cm]{classQPoolObject__inherit__graph}
+		\includegraphics[height=4cm]{classQPoolRectObject__inherit__graph}
+	\end{center}
+\end{frame}
+
+\begin{frame}{GUI: Ticker / Refresher}
+	\begin{itemize}
+		\item Engine and GUI should not interfere
+		\begin{enumerate}
+			\item Neither with respect fluency in usage
+			\item Nor with respect to memory access
+		\end{enumerate}
+		
+		\vspace*{1em}
+		\item Possible realization
+		\begin{enumerate}
+			\item Use of separate threads
+			\item Use of QAnimation
+		\end{enumerate}
+		
+		\vspace*{1em}
+		\item The actual implementation
+		\begin{enumerate}
+			\item Use of QThreads (Ticker, Refresher)
+			\item High rate of screen updates (does interfere {\large \frownie{}})
+		\end{enumerate}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Feature List}
+	\begin{itemize}
+		\item Engine
+		\begin{itemize}
+			\item Shapes: rectangles, ellipses (changeable)
+			\item Objects: moving, boundary, static
+			\item Elastic collisions for all object/object combinations
+		\end{itemize}
+		
+		\vspace*{1em}
+		\item GUI
+		\begin{itemize}
+			\item Start/stop functionality
+			\item Create, update, and delete objects
+			\item Specify/change shape, geometry, velocity, and color
+		\end{itemize}
+		
+		\vspace*{1em}
+		\item Usability
+		\begin{itemize}
+			\item High fun factor
+			\item Frequent memory crashes
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+\end{document}
