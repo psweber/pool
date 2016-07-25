@@ -1,0 +1,15 @@
+========
+= Pool =
+========
+
+Build manually or via Qt Creator:
+	1) Build engine
+	2) Build qt-gui
+
+Build via script:
+	./buildAll.sh
+
+
+Please note:
+Sometimes there is a segmentation fault. This will
+probably fixed soon. I am sorry for the inconvenience.

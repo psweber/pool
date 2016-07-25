@@ -1,0 +1,10 @@
+*.o
+*.a
+*.so
+
+moc*
+ui_*
+
+Makefile
+html
+latex
