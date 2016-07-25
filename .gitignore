@@ -1,6 +1,7 @@
 *.o
 *.a
 *.so
+*.db
 
 moc*
 ui_*
@@ -8,3 +9,5 @@ ui_*
 Makefile
 html
 latex
+
+qt-gui
