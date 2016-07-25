@@ -13,5 +13,9 @@ make
 # Build doc
 cd ../../doc
 doxygen
+cd latex
+make
+cd ../beamer
+pdflatex main.tex
 
 echo "Done"
