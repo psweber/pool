@@ -38,17 +38,17 @@ private:
     /**
      * @brief graphicsScene_ The only graphics scene
      */
-    std::shared_ptr<QGraphicsScene> graphicsScene_;
+    QGraphicsScene* graphicsScene_;
     
     /**
      * @brief ticker_ The ticker responsible for pool engine running
      */
-    std::shared_ptr<EngineTicker> ticker_;
+    EngineTicker* ticker_;
     
     /**
      * @brief refresher_ The refresher responsible for graphics scene updating
      */
-    std::shared_ptr<SceneRefresher> refresher_;
+    SceneRefresher* refresher_;
     
     /**
      * @brief window_ The main window
@@ -136,25 +136,25 @@ public:
      * @brief scene Returns graphics scene
      * @return
      */
-	std::shared_ptr<QGraphicsScene> scene() { return graphicsScene_; }
+	QGraphicsScene* scene() { return graphicsScene_; }
 
     /**
      * @brief scene Returns graphics scene
      * @return
      */
-	const std::shared_ptr<QGraphicsScene> scene() const { return graphicsScene_; }
+	const QGraphicsScene* scene() const { return graphicsScene_; }
 	
     /**
      * @brief ticker Returns ticker
      * @return
      */
-	std::shared_ptr<EngineTicker> ticker() { return ticker_; }
+	EngineTicker* ticker() { return ticker_; }
 
     /**
      * @brief ticker Returns ticker
      * @return
      */
-	const std::shared_ptr<EngineTicker> ticker() const { return ticker_; }
+	const EngineTicker* ticker() const { return ticker_; }
 	
     /**
      * @brief window Sets main window

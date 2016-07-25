@@ -1,7 +1,6 @@
 #include "scenerefresher.h"
 #include "qpoolengine.h"
 #include <QGraphicsScene>
-#include <unistd.h>
 
 #include <QDebug>
 
@@ -17,15 +16,12 @@ void SceneRefresher::start()
 	if (stop_ == false) { return; }
 	stop_ = false;
 	
-	// Compute sleep time (assuming negligable updating time)
-	double sleepTime = 1.0/framesPerSecond_;
-	int uSleepTime = 1e6*sleepTime;
-	
 	// Refresher loop
 	while (! stop_)
 	{
+		break;
+		engine_->tick();
 		engine_->updateObjects();
 		engine_->updateScene();
-		usleep(uSleepTime);
 	}
 }

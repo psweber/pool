@@ -2,7 +2,7 @@
 
 # include <list>
 # include "Objects.hpp"
-
+# include "CollisionModel.hpp"
 
 #include <iostream>
 namespace engine
@@ -11,6 +11,8 @@ namespace engine
 class CollisionDetector;
 class CollisionModel;
 class CollisionSet;
+
+
 
 typedef std::list<std::pair<std::shared_ptr<MovingObject>,std::shared_ptr<Object>>> CollisionList;
 
@@ -103,6 +105,37 @@ class PoolTable
          * @brief printBoundingBoxes Print bounding boxes to stdout
          */
 		void printBoundingBoxes() const;
+		
+		
+		/**
+		 * @brief deleteCollisionSet Delete given collision
+		 */
+		void deleteCollisionSet
+		(
+			ShapeType shTypeI,
+			ShapeType shTypeII,
+			ObjectType objType
+		);
+		
+		/**
+		 * @brief addCollisionSet Create and add collisions with given object and collision type
+		 */
+		void createCollisionSet
+		(
+			ObjectType objType,
+			CollisionType colType = CollisionType::ELASTIC
+		);
+		
+		/**
+		 * @brief addCollisionSet Create and add collision set
+		 */
+		void createCollisionSet
+		(
+			ShapeType shTypeI,
+			ShapeType shTypeII,
+			ObjectType objType,
+			CollisionType colType = CollisionType::ELASTIC
+		);
 };
 
 template <typename T>
@@ -154,7 +187,6 @@ void PoolTable::deleteObjectFromVector
 	// Remove
 	if(it != vec.end())
 	{
-		std::cout << "Remove object id " << (*it)->id() << " from object vector\n";
 		vec.erase(it);
 	}
 }

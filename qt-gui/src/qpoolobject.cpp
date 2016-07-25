@@ -52,24 +52,6 @@ QVector<double> QPoolObject::velocity()
 	}
 }
 
-void QPoolObject::velocity(QVector<double> vel)
-{
-	qDebug() << "In velocity update";
-	// Do nothing if object is not moving
-	if ( ! poolObject()->isMoving()) { return; }
-	
-	qDebug() << "still" << vel;
-	
-	std::shared_ptr<engine::MovingObject> engMovObj
-	(
-		std::static_pointer_cast<engine::MovingObject>
-		(
-			poolObject()
-		)
-	);
-	
-	engMovObj->velocity(std::valarray<double>({vel[0],vel[1]}));
-}
 
 QPoolObject* QPoolObject::asQPoolObject(QGraphicsItem* gItem)
 {

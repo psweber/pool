@@ -20,7 +20,7 @@ class MainWindow : public QMainWindow
 private:
 	Ui::MainWindow *ui_;
 
-	std::shared_ptr<QPoolEngine> engine_;
+	QPoolEngine* engine_;
     
     
 public:
@@ -34,8 +34,8 @@ public:
      * @brief engine Set the engine
      * @param engine
      */
-	void engine(std::shared_ptr<QPoolEngine> engine);
-	const std::shared_ptr<QPoolEngine> engine() const { return engine_; }
+	void engine(QPoolEngine* engine);
+	const QPoolEngine* engine() const { return engine_; }
 
     /**
      * @brief view Return the QGraphicsView

@@ -14,7 +14,7 @@ class QPoolEngine;
  * representations of pool objects. It provides polymorphic access to the
  * object updating.
  */
-class QPoolObject
+class QPoolObject : public QObject
 {
 private:
 		QPoolEngine* engine_;
@@ -86,7 +86,6 @@ public:
      */
     std::shared_ptr<engine::Object> poolObject() { return poolObj_; }
     
-    void velocity(QVector<double> vel);
     QVector<double> velocity();
     const QVector<double>& velocity() const;
     

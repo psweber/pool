@@ -63,6 +63,7 @@ class CollisionSet
 			std::shared_ptr<Object> obj2
 		);
 		
+		static void printSet(std::vector<std::shared_ptr<CollisionSet>> set);
 		ShapeType shapeI() const { return shapeI_; }
 		ShapeType shapeII() const { return shapeII_; }
 		ObjectType objectType() const { return objectType_; }

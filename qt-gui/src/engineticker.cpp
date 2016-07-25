@@ -1,12 +1,10 @@
 #include "engineticker.h"
 
-#include "PoolEngine.hpp"
+#include "qpoolengine.h"
 
-EngineTicker::EngineTicker(engine::PoolEngine* engine) :
+EngineTicker::EngineTicker(QPoolEngine* engine) :
     engine_(engine)
-{
-}
-
+{}
 
 void EngineTicker::start()
 {
@@ -19,5 +17,7 @@ void EngineTicker::start()
 	while ( ! stop_ )
 	{
 		engine_->tick();
+		engine_->updateObjects();
+		engine_->updateScene();
 	}
 }

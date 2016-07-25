@@ -8,7 +8,7 @@
  * @brief The QPoolEllipseObject class is the graphical representation of
  * the ellipse object used by the pool engine.
  */
-class QPoolEllipseObject : public QPoolObject, public QGraphicsEllipseItem
+class QPoolEllipseObject : public QGraphicsEllipseItem, public QPoolObject
 {
 protected:
 		virtual void mousePressEvent(QGraphicsSceneMouseEvent *event);

@@ -23,7 +23,7 @@ typedef std::valarray<double> ValArray;
 
 QPoolEngine::QPoolEngine() :
 	screenSize_({550,481}),
-    graphicsScene_(new QGraphicsScene()),
+    graphicsScene_(new QGraphicsScene(this)),
     ticker_(new EngineTicker(this)),
     refresher_(new SceneRefresher(this))
 {
@@ -33,13 +33,27 @@ QPoolEngine::QPoolEngine() :
     
     refresher_->framesPerSecond(60);
     refresher_->moveToThread(&refresherThread_);
-    refresherThread_.start();
+    //refresherThread_.start();
+    
+    table().createCollisionSet(engine::ObjectType::BOUNDARY);
+    
+    //table().createCollisionSet(engine::ObjectType::MOVING);
+    
+    
+    table().createCollisionSet
+    (
+		engine::ShapeType::RECTANGLE,
+		engine::ShapeType::RECTANGLE,
+		engine::ObjectType::MOVING
+	);
+	
 }
 
 void QPoolEngine::connect()
 {
 	// Connect create button with slotCreateMovingObject
 	QObject::connect(ui()->createButton, SIGNAL(clicked()), this, SLOT(slotCreateMovingObject()));
+	QObject::connect(ui()->createButton, SIGNAL(clicked()), this, SLOT(slotRandomVelocity()));
 	
 	// Connect update button with slotUpdateMovingObject
 	QObject::connect(ui()->updateButton, SIGNAL(clicked()), this, SLOT(slotUpdateObject()));
@@ -48,8 +62,8 @@ void QPoolEngine::connect()
 	QObject::connect(ui()->deleteButton, SIGNAL(clicked()), this, SLOT(slotDeleteObject()));
 
 	// Connect start button to ticker and refresher start
-	QObject::connect(ui()->startButton, SIGNAL(clicked()), ticker_.get(), SLOT(start()));
-	QObject::connect(ui()->startButton, SIGNAL(clicked()), refresher_.get(), SLOT(start()));
+	QObject::connect(ui()->startButton, SIGNAL(clicked()), ticker_, SLOT(start()));
+	QObject::connect(ui()->startButton, SIGNAL(clicked()), refresher_, SLOT(start()));
 	
 	// Connect pause button to ticker and refresher stop
 	QObject::connect(ui()->pauseButton, SIGNAL(clicked()), this, SLOT(slotStopTicker()));
@@ -106,11 +120,8 @@ void QPoolEngine::createTableBoundary()
 		);
 		
 		qObj->setBrush(QColor(50,50,50));
-		
-		// Append boundary element to object list
-		//objectList_.append(qObj);
-		
 		scene()->addItem(qObj);
+		qObj->setParent(scene());
 	}
 }
 
@@ -160,6 +171,7 @@ QPoolObject* QPoolEngine::createMovingObject
 			break;
 	}
 	
+	qObj->setParent(scene());
 	return qObj;
 }
 
@@ -469,6 +481,8 @@ void QPoolEngine::printObjects() const
 
 void QPoolEngine::updateObjects()
 {
+	qDebug() << "updating " << scene()->items().size() << " items, "
+	  << "having " << scene()->children().size() << " children";
 	for (auto item : scene()->items())
 	{
 		QPoolObject *qObj(dynamic_cast<QPoolObject*>(item));

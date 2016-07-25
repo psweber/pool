@@ -5,10 +5,8 @@
 
 #include <QDebug>
 
-namespace engine
-{
-class PoolEngine;
-}
+
+class QPoolEngine;
 
 
 /**
@@ -23,7 +21,7 @@ private:
     /**
      * @brief engine_ The pool engine
      */
-	engine::PoolEngine* engine_;
+	QPoolEngine* engine_;
 
     /**
      * @brief stop_ Flag read in every updating cycle, stops ticker if true
@@ -35,7 +33,7 @@ public:
      * @brief EngineTicker Constructor requires the pool engine
      * @param engine
      */
-    EngineTicker(engine::PoolEngine* engine);
+    EngineTicker(QPoolEngine* engine);
 	
 	
 signals:

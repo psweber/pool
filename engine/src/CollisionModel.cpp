@@ -1,6 +1,7 @@
 # include "CollisionModel.hpp"
 
 # include "Objects.hpp"
+# include "Utils.hpp"
 
 # include <iostream>
 
@@ -53,13 +54,13 @@ void engine::ElasticCollision::collide
 	
 	// Time till collision in x direction
 	double tx;
-	if (cxRel > 0) { tx = (cxRel-padx)/(-vxRel); }
-	else { tx = (-cxRel-padx)/vxRel; }
+	if (cxRel > 0) { tx = (cxRel-padx)/stabilize(-vxRel); }
+	else { tx = (-cxRel-padx)/stabilize(vxRel); }
 	
 	// Time till collision in y direction
 	double ty;
-	if (cyRel > 0) { ty = (cyRel-pady)/(-vyRel); }
-	else { ty = (-cyRel-pady)/vyRel; }
+	if (cyRel > 0) { ty = (cyRel-pady)/stabilize(-vyRel); }
+	else { ty = (-cyRel-pady)/stabilize(vyRel); }
 	
 	
 	

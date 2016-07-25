@@ -3,6 +3,7 @@
 # include <chrono>
 # include <unistd.h>
 
+# include <iostream>
 void engine::PoolEngine::ticksPerSecond(int tps)
 {
 	ticksPerSecond_ = tps;
@@ -26,5 +27,7 @@ void engine::PoolEngine::tick()
 	// Compute how long to sleep to match given time for tick
 	double sleepTime = secondsPerTick_ - timeTaken;
 	unsigned int uSleepTime = sleepTime * 1e6;
+	if (sleepTime < 0) { uSleepTime = 0; }
+	
 	usleep(uSleepTime);
 }

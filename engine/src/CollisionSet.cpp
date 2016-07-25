@@ -1,6 +1,8 @@
 # include "CollisionSet.hpp"
 # include "Objects.hpp"
 
+# include <iostream>
+
 engine::CollisionSet::CollisionSet
 (
 	ShapeType shapeI,
@@ -77,4 +79,36 @@ bool engine::CollisionSet::clip
 	}
 	
 	return true;
+}
+
+void engine::CollisionSet::printSet(std::vector<std::shared_ptr<CollisionSet>> set)
+{
+	std::cout << "Printing collision sets" << std::endl;
+	for (auto s : set)
+	{
+		std::cout << "CollisionSet: ";
+		
+		switch (s->shapeI())
+		{
+			case ShapeType::NONE: std::cout      << "NONE,      "; break;
+			case ShapeType::RECTANGLE: std::cout << "RECTANGLE, "; break;
+			case ShapeType::ELLIPSE: std::cout   << "ELLIPSE,   "; break;
+		}
+				
+		switch (s->shapeII())
+		{
+			case ShapeType::NONE: std::cout      << "NONE,      "; break;
+			case ShapeType::RECTANGLE: std::cout << "RECTANGLE, "; break;
+			case ShapeType::ELLIPSE: std::cout   << "ELLIPSE,   "; break;
+		}
+		
+		switch (s->objectType())
+		{
+			case ObjectType::BOUNDARY: std::cout << "BOUNDARY "; break;
+			case ObjectType::STATIC: std::cout   << "STATIC   "; break;
+			case ObjectType::MOVING: std::cout   << "MOVING   "; break;
+		}
+		
+		std::cout << std::endl;
+	}
 }

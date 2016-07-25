@@ -8,32 +8,7 @@
 engine::PoolTable::PoolTable()
 :
 detector_(new PairwiseBoundingBox(*this))
-{
-	// Create collision sets for all possible interactions
-	// Set all to elastic type
-	for ( int i=1; i<3; i++)
-	{
-		ShapeType shTy1 = (ShapeType) i;
-		
-		for ( int j=1; j<3; j++)
-		{
-			ShapeType shTy2 = (ShapeType) j;
-		
-			for (int k=0; k<3; k++)
-			{
-				ObjectType obTy = (ObjectType) k;
-				
-				collisionSets_.push_back
-				(
-					std::shared_ptr<CollisionSet>
-					(
-						new CollisionSet(shTy1,shTy2,obTy,CollisionType::ELASTIC)
-					)
-				);
-			}
-		}
-	}
-}
+{}
 
 void engine::PoolTable::updateKinematics(double deltaT)
 {
@@ -131,4 +106,35 @@ void engine::PoolTable::deleteObject(std::shared_ptr<Object> obj)
 	}
 }
 
+void engine::PoolTable::createCollisionSet(ObjectType objType, CollisionType colType)
+{
+	for ( int i=1; i<3; i++)
+	{
+		ShapeType shTy1 = (ShapeType) i;
+		
+		for ( int j=1; j<3; j++)
+		{
+			ShapeType shTy2 = (ShapeType) j;
+		
+			createCollisionSet(shTy1,shTy2,objType,colType);
+		}
+	}
+}
+
+void engine::PoolTable::createCollisionSet
+(
+	ShapeType shTypeI,
+	ShapeType shTypeII,
+	ObjectType objType,
+	CollisionType colType
+)
+{
+	collisionSets_.push_back
+	(
+		std::shared_ptr<CollisionSet>
+		(
+			new CollisionSet(shTypeI,shTypeII,objType,colType)
+		)
+	);
+}
 

@@ -11,7 +11,7 @@ int main(int argc, char *argv[])
 	QApplication a(argc, argv);
 
 	// Create engine
-	std::shared_ptr<QPoolEngine> engine( new QPoolEngine() );
+	QPoolEngine* engine = new QPoolEngine();
 	
 	// Create and show GUI
 	MainWindow w;

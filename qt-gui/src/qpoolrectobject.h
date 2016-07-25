@@ -9,7 +9,7 @@
  * @brief The QPoolRectObject class is the graphical representation of
  * the rectangle object used by the pool engine.
  */
-class QPoolRectObject : public QPoolObject, public QGraphicsRectItem
+class QPoolRectObject : public QGraphicsRectItem, public QPoolObject
 {
 protected:
 		virtual void mousePressEvent(QGraphicsSceneMouseEvent *event);
