@@ -59,6 +59,7 @@ void QPoolRectObject::updateFromEngine()
 	// Create new rect
 	double centerX = rectShape->center()[0];
 	double centerY = rectShape->center()[1];
+	
     double w = rectShape->width();
 	double h = rectShape->height();
 	
@@ -72,6 +73,11 @@ void QPoolRectObject::updateFromEngine()
 	
 	// Update rectangle
 	this->setRect(qRect);
+	
+	/*
+	qDebug() << "set center to " <<centerX<< ", "<<centerY;
+	this->setPos(centerX,centerY);
+	*/
 }
 
 void QPoolRectObject::mousePressEvent(QGraphicsSceneMouseEvent *event)

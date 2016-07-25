@@ -18,6 +18,6 @@ void EngineTicker::start()
 	{
 		engine_->tick();
 		engine_->updateObjects();
-		//engine_->updateScene();
+		engine_->updateScene();
 	}
 }

@@ -132,6 +132,9 @@ void QPoolEngine::createTableBoundary()
 		qObj->setBrush(QColor(50,50,50));
 		scene()->addItem(qObj);
 		qObj->setParent(scene());
+		
+		qDebug() << "pos of qObj: " << qObj->x() <<", "<< qObj->y();
+		qDebug() << "scenePos of qObj: " << qObj->scenePos().x() <<", "<< qObj->scenePos().y();
 	}
 }
 
@@ -499,6 +502,9 @@ void QPoolEngine::updateObjects()
 		QPoolObject *qObj(dynamic_cast<QPoolObject*>(item));
 		
 		qObj->updateFromEngine();
+		
+		qDebug() << "pos of item: " << item->x() <<", "<< item->y();
+		qDebug() << "scenePos of item: " << item->scenePos().x() <<", "<< item->scenePos().y();
 	}
 }
 

@@ -23,6 +23,11 @@ int main(int argc, char *argv[])
 	engine->createTableBoundary();
 	engine->updateScene();
 	
+	for (auto qObj : engine->scene()->items())
+	{
+		qDebug() << "pos of qObj: " << qObj->x() <<", "<< qObj->y();
+		qDebug() << "scenePos of qObj: " << qObj->scenePos().x() <<", "<< qObj->scenePos().y();
+	}
 	// Run
     return a.exec();
 
