@@ -16,6 +16,7 @@ doxygen
 cd latex
 make
 cd ../beamer
+./makeGraphics.sh
 pdflatex main.tex
 
 echo "Done"
